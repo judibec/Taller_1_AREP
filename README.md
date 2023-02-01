@@ -69,4 +69,6 @@ Version 1.0
 
 ## Descripcion especifica
 
-
+* Extensibilidad: Si se desean cambiar la pagina de la cual se obtiene la informacion, solamente se debe modificar la url o realizar los cambios respectivos a la misma, en temas de los filtros seria agregar un formulario mas en el HTML pues la respuesta en JSON ya la reconoce.
+* Patrones: El principal patron que se uso fue Fachada, puesto que la clase Cache recibe toda la consulta inicialmente y antes de preguntarle a la API revisa si el puede responder.
+* Modular: En cada clase se realizan funciones independientes. En HttpServer tenemos la que levanta el servidor la cual es el metodo main y la que crea la tabla respectiva del JSON, la clase Cache unicamente me guarda la informacion y me la retorna si ya esta en memoria y la HttpConnection realiza el enlace entre la pagina de las APIs y el socket creado por HttpServer.
