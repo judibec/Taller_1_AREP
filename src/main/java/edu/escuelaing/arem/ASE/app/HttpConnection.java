@@ -14,6 +14,12 @@ public class HttpConnection {
     private static String GET_URL = "http://www.omdbapi.com/?t=";
     private static final String API_KEY = "&apikey=485c6ae1";
 
+    /**
+     *
+     * @param title String del titulo de la pelicula a buscar
+     * @return Devuelve un String en forma de JSON que nos devuelve la API con la informacion de la pelicula buscada
+     * @throws IOException
+     */
     public static String RsponseApi(String title) throws IOException {
         String apiAnswer = "";
 //        System.out.println(title);

@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class HttpServer {
@@ -44,9 +46,13 @@ public class HttpServer {
             if(!Objects.equals(title, "")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: application/json\r\n"
-                        + "\r\n"+
-                        HttpConnection.RsponseApi(title);
-                System.out.println(title);
+                        + "\r\n" +
+                        "<style>\n" +
+                        "table, th, td {\n" +
+                        "  border:1px solid black;\n" +
+                        "}\n" +
+                        "</style>"+
+                        createTable(Cache.findTitle(title));
             }else {
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text/html\r\n"
@@ -64,7 +70,7 @@ public class HttpServer {
                         "            <label for=\"name\">Title:</label><br>\n" +
                         "            <input type=\"text\" id=\"name\" name=\"name\" value=\"John\"><br><br>\n" +
                         "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsg()\">\n" +
-                        "        </form> \n" +
+                        "        </form> \n" + "<br>"+
                         "        <div id=\"getrespmsg\"></div>\n" +
                         "\n" +
                         "        <script>\n" +
@@ -88,5 +94,28 @@ public class HttpServer {
             clientSocket.close();
         }
         serverSocket.close();
+    }
+
+    /**
+     * Crea una tabla en formato HTML
+     * @param apiAnswer recibe el String que tiene formato de JSON de la respuesta de la pelicula
+     * @return String con sintaxis HTML para generar una tabla con el JSON que entra
+     */
+    private static String createTable(String apiAnswer){
+        String[] apiDatini = apiAnswer.split(":");
+//        ArrayList<String> apiDatafin = (ArrayList<String>) Arrays.stream(apiDatini).toList();
+        String tabla = "<table> \n";
+        for (int i = 0;i<(apiDatini.length);i++) {
+                String[] temporalAnswer = apiDatini[i].split(",");
+                tabla+="<td>" + Arrays.toString(Arrays.copyOf(temporalAnswer, temporalAnswer.length - 1)).replace("[","").replace("]","").replace("}","") + "</td>\n</tr>\n";
+                tabla+="<tr>\n<td>" +  temporalAnswer[temporalAnswer.length-1].replace("{","").replace("[","") + "</td>\n";
+
+
+//                tabla += "<tr>\n<td>" + apiDatini[i] + "</td>\n";
+
+        }
+        tabla += "</table>";
+        return tabla;
+
     }
 }
