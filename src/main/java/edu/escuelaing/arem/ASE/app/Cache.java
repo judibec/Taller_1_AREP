@@ -3,6 +3,9 @@ package edu.escuelaing.arem.ASE.app;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Memoria cache de la API
+ */
 public class Cache {
     public static ConcurrentHashMap<String,String> movies = new ConcurrentHashMap<>();
 

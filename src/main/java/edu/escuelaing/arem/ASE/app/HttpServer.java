@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Clase main que levanta el servidor y carga la pagina
+ */
 public class HttpServer {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = null;

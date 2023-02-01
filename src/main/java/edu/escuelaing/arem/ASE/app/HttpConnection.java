@@ -8,6 +8,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 
+/**
+ * API encargada de conectarse con la pagina para retornar la informacion
+ */
 public class HttpConnection {
 
     private static final String USER_AGENT = "Mozilla/5.0";
